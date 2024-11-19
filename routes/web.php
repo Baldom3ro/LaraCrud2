@@ -56,9 +56,8 @@ Route::get('/updateproducts/',[ProductController::class, 'update'])
 Route::get('/destroyproducts/',[ProductController::class, 'destroy']) 
 -> name('pdestroy');
 */
-Route::resource('/products', ProductController::class);
-
-Route::get('/products/{product}/delete',
-[ProductController::class, 'delete'])->name('products.delete');
-
-Route::resource('/brands', BrandController::class);
+Route::resource('/products', App\Http\Controllers\ProductController::class);
+Route::get('/products/{product}/delete',[ProductController::class, 'delete'])->name('products.delete');
+Route::resource('/brands', App\Http\Controllers\BrandController::class);
+Route::resource('/clients', App\Http\Controllers\ClientController::class);
+Route::resource('/sales', App\Http\Controllers\SaleController::class);

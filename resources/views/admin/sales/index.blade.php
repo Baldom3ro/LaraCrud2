@@ -1,5 +1,5 @@
 @extends('layout.main_template')
 
 @section('content')
-<h1>Index ventas</h1>
+<h1>Ventas</h1>
 @endsection

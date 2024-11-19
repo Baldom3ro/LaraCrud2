@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         $gallina = Product::get(); 
-        return view('products_index', compact('gallina')); 
+        return view('admin/products/index', compact('gallina')); 
     }
 
     /**
@@ -26,7 +26,7 @@ class ProductController extends Controller
         //$brands = Brand::get(); //Obtener todos los datos
         $brands = Brand::pluck('id', 'brand'); //Obtener datos especificos
         //dd($brands); //Verificar que los datos se esten extrayendo
-        return view('products_create', compact('brands'));
+        return view('admin/products/create', compact('brands'));
     }
 
     /**
@@ -45,7 +45,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('products_show', compact('product'));
+        return view('admin/products/show', compact('product'));
     }
 
     /**
@@ -54,7 +54,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $brands = Brand::pluck('id', 'brand'); //Obtener datos especificos
-        return view('products_edit', compact('product','brands'));
+        return view('admin/products/edit', compact('product','brands'));
     }
 
     /**
@@ -63,16 +63,15 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $product->update($request->all());//Actualizamos los datos en la base de datos
-        return to_route(route: 'products.index')->with('status', 'Producto actualizado.');
+        return to_route(route: 'products./index')->with('status', 'Producto actualizado.');
     }
-
-    public function delete(Product $product)
-    {
-        echo view('products_delete', compact('product'));
-    }
+    
     /**
      * Remove the specified resource from storage.
      */
+    public function delete(Product $product){
+        echo view ('admin/products/delete', compact('product'));
+    }
     public function destroy(Product $product)
     {
         $product ->delete();
