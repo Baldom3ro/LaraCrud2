@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Brand;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
+use App\Http\Requests\Products\StoreRequest;
 
 class ProductController extends Controller
 {
@@ -14,7 +16,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $gallina = Product::get(); 
+        //$gallina = Product::get(); 
+        $gallina = Product::paginate(3);
         return view('admin/products/index', compact('gallina')); 
     }
 
@@ -32,11 +35,22 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         //echo "Registro Realizado";
         //dd($request);
-        Product::create($request->all());
+        //Si el campo imagen tiene informaciónc
+        $data= $request->all();
+
+        if(isset($data["imagen"])){
+            //Cambiar el nombre del archivo a cargar
+            $data["imagen"] = $filename = time().".".$data["imagen"]->extension();
+            //Guardar imagen en la carpeta publica
+            $request->imagen->move(public_path("image/products"),$filename);
+        }
+
+
+        Product::create($data);
         return to_route(route: 'products.index')->with('status', 'Producto registrado');
     }
 
@@ -62,8 +76,20 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $product->update($request->all());//Actualizamos los datos en la base de datos
-        return to_route(route: 'products./index')->with('status', 'Producto actualizado.');
+        $data= $request->all();
+
+        //Si el campo imagen tiene informaciónc
+        if(isset($data["imagen"])){
+            //Cambiar el nombre del archivo a cargar
+            $data["imagen"] = $filename = time().".".$data["imagen"]->extension();
+            //Guardar imagen en la carpeta publica
+            $request->imagen->move(public_path("image/products"),$filename);
+        }
+
+        $product->update($data);//Actualizamos los datos en la base de datos
+
+
+        return to_route(route: 'products.index')->with('status', 'Producto actualizado.');
     }
     
     /**

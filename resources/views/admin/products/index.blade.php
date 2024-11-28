@@ -11,7 +11,8 @@
 <table>
     <thead>
         <th>Nombre del producto</th>
-        <th>Marca Id</th>
+        <th>Marca</th>
+        <th>Descripción</th>
         <th>Cantidad</th>
         <th>Precio</th>
         <th>Imagen</th>
@@ -21,10 +22,11 @@
         @foreach ($gallina as $p)
             <tr>
                 <td>{{$p->nameProduct}}</td>
-                <td>{{$p->brand_id}}</td>
+                <td>{{$p->brand->brand}}</td>
+                <td>{{$p->brand->description}}</td>
                 <td>{{$p->stock}}</td>
                 <td>{{$p->unit_price}}</td>
-                <td>{{$p->imagen}}</td>
+                <td><img src="/image/products/{{$p->imagen}}" width="60" alt="producto"></td>
                 <td>
                     <button><a href="{{route("products.show",$p)}}">Mostrar</a></button>
                     <button><a href="{{route("products.edit",$p)}}">Editar</a></button>
@@ -34,4 +36,5 @@
         @endforeach
     </tbody>
 </table>
+{{$gallina->links()}} <!-- Genera los enlaces de cada pagina -->
 @endsection
