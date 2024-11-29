@@ -8,7 +8,7 @@
     <button><a href="{{ route('brands.index') }}">Mostrar Marcas</a></button>
     <br>
 
-<table>
+<table class="table table-dark table-striped">
     <thead>
         <th>Nombre del producto</th>
         <th>Marca</th>
@@ -28,9 +28,9 @@
                 <td>{{$p->unit_price}}</td>
                 <td><img src="/image/products/{{$p->imagen}}" width="60" alt="producto"></td>
                 <td>
-                    <button><a href="{{route("products.show",$p)}}">Mostrar</a></button>
-                    <button><a href="{{route("products.edit",$p)}}">Editar</a></button>
-                    <button><a href="{{route("products.delete",$p)}}">Eliminar</a></button>
+                    <button type="button" class="btn btn-outline-success"><a href="{{route("products.show",$p)}}"><i class="fa-solid fa-plus"></i></button>
+                    <button type="button" class="btn btn-outline-info"><a href="{{route("products.edit",$p)}}"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button type="button" class="btn btn-outline-danger"><a href="{{route("products.delete",$p)}}"><i class="fa-solid fa-trash"></i></button>
                 </td>
             </tr>
         @endforeach
