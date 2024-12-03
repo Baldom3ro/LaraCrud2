@@ -4,15 +4,16 @@
 
     <h1>Marcas</h1>
     <br>
-    <button><a href="{{route('brands.create')}}">Registrar marca</a></button>
+    <button class="btn btn-outline-primary"><a href="{{route('brands.create')}}">Registrar marca</a></button>
+    <br>
     <br>
 
-<table>
+<table class="table table-dark table-striped">
     <thead>
-        <th>Nombre de la Marca</th>
-        <th>Marca Id</th>
+        <th>ID</th>
         <th>Nombre</th>
         <th>Descripción</th>
+        <th>Acciones</th>
     </thead>
     <tbody>
         @foreach ($brand as $b)
@@ -21,13 +22,9 @@
                 <td>{{$b->brand}}</td>
                 <td>{{$b->description}}</td>
                 <td>
-                    <button><a href="{{route("brands.show",$b)}}">Mostrar</a></button>
-                    <button><a href="{{route("brands.edit",$b)}}">Editar</a></button>
-                    <form action="{{route('brands.destroy',$b)}}" method="POST">
-                        @method("DELETE")
-                        @csrf
-                        <button type="submit">Eliminar</button>
-                    </form>
+                    <button type="button" class="btn btn-outline-success"><a href="{{route("brands.show",$b)}}"><i class="fa-solid fa-plus"></i></a></button>
+                    <button type="button" class="btn btn-outline-info"><a href="{{route("brands.edit",$b)}}"><i class="fa-solid fa-pen-to-square"></i></a></button>
+                    <button type="button" class="btn btn-outline-danger"><a href="{{route("brands.delete",$b)}}"><i class="fa-solid fa-trash"></i></button>
                 </td>
             </tr>
         @endforeach

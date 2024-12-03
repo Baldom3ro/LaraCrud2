@@ -15,8 +15,15 @@
         <li class="nav-item">
           <a class="nav-link" href="{{route('products.index')}}">Productos</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{route('clients.index')}}">Clientes</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Clientes
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{route('clients.index')}}">Lista de clientes</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{{route('addresses.index')}}">Direcciones</a></li>
+          </ul>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{route('sales.index')}}">Ventas</a>

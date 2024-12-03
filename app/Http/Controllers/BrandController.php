@@ -63,6 +63,9 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    public function delete(Brand $brand){
+        echo view ('admin/brands/delete', compact('client'));
+    }
     public function destroy(Brand $brand)
     {
         $brand->delete();

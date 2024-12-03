@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,6 +61,15 @@ Route::get('/destroyproducts/',[ProductController::class, 'destroy'])
 */
 Route::resource('/products', App\Http\Controllers\ProductController::class);
 Route::get('/products/{product}/delete',[ProductController::class, 'delete'])->name('products.delete');
+
 Route::resource('/brands', App\Http\Controllers\BrandController::class);
+Route::get('/brands/{brand}/delete',[BrandController::class, 'delete'])->name('brands.delete');
+
 Route::resource('/clients', App\Http\Controllers\ClientController::class);
+Route::get('/clients/{client}/delete',[ClientController::class, 'delete'])->name('clients.delete');
+
 Route::resource('/sales', App\Http\Controllers\SaleController::class);
+Route::get('/sales/{sale}/delete',[SaleController::class,'delete'])->name('sales.delete');
+
+Route::resource('/addresses', App\Http\Controllers\AddressController::class);
+Route::get('/addresses/{address}/delete',[AddressController::class,'delete'])->name('addresses.delete');

@@ -13,7 +13,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return view('admin/clients/index');
+        $client = Client::paginate(3);
+        return view('admin/clients/index', compact('client'));
     }
 
     /**
@@ -21,7 +22,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/clients/create');
     }
 
     /**
@@ -29,7 +30,9 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=$request->all();
+        Client::create($data);
+        return to_route(route: 'clients.index');
     }
 
     /**
@@ -37,7 +40,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
+        return view('admin/clients/show', compact('client'));
     }
 
     /**
@@ -45,7 +48,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view ('admin/clients/edit', compact('client'));
     }
 
     /**
@@ -53,14 +56,20 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        $data= $request->all();
+        $client->update($data);
+        return to_route(route: 'clients.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
+    public function delete(Client $client){
+        echo view('admin/clients/delete', compact('client'));
+    }
     public function destroy(Client $client)
     {
-        //
+        $client->delete();
+        return to_route('clients.index');
     }
 }

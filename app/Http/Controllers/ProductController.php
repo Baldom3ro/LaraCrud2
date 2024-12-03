@@ -39,7 +39,7 @@ class ProductController extends Controller
     {
         //echo "Registro Realizado";
         //dd($request);
-        //Si el campo imagen tiene informaciónc
+        //Si el campo imagen tiene información
         $data= $request->all();
 
         if(isset($data["imagen"])){
@@ -51,7 +51,7 @@ class ProductController extends Controller
 
 
         Product::create($data);
-        return to_route(route: 'products.index')->with('status', 'Producto registrado');
+        return to_route(route: 'products.index');
     }
 
     /**
@@ -89,7 +89,7 @@ class ProductController extends Controller
         $product->update($data);//Actualizamos los datos en la base de datos
 
 
-        return to_route(route: 'products.index')->with('status', 'Producto actualizado.');
+        return to_route(route: 'products.index');
     }
     
     /**
@@ -101,7 +101,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product ->delete();
-        return to_route('products.index')->with('status','Producto eliminado');
+        return to_route('products.index');
     }
 
     

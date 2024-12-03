@@ -7,17 +7,17 @@
 <table>
     <thead>
         <h3>¿Estas seguro que quieres eliminar 
-            la marca {{$brand->brand}}?</h3>
+            el cliente {{$client->name}}?</h3>
     </thead>
     <tbody>
         <tr>
             <td>
-                <form action="{{route('brands.index')}}">
+                <form action="{{route('clients.index')}}">
                     <button type="submit">No</button>
                 </form>
             </td>
             <td>
-                <form action="{{route('brands.destroy', $client->id)}}" method="POST">
+                <form action="{{route('clients.destroy', $client->id)}}" method="POST">
                     @method("DELETE")
                     @csrf
                     <button type="submit">Si</button>

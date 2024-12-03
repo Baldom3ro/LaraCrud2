@@ -3,9 +3,10 @@
 @section('content')
     <h1>Productos</h1>
     <br>
-    <button><a href="{{route('products.create')}}">Crear producto</a></button>
-    <button><a href="{{route('brands.create')}}">Registrar marca</a>
-    <button><a href="{{ route('brands.index') }}">Mostrar Marcas</a></button>
+    <button class="btn btn-outline-primary"><a href="{{route('products.create')}}">Crear producto</a></button>
+    <button class="btn btn-outline-primary"><a href="{{route('brands.create')}}">Registrar marca</a>
+    <button class="btn btn-outline-primary"><a href="{{ route('brands.index') }}">Mostrar Marcas</a></button>
+    <br>
     <br>
 
 <table class="table table-dark table-striped">
