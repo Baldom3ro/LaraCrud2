@@ -15,8 +15,8 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $sale = Sale::paginate(4);
-        return view ('admin/sales/index');
+        $sales = Sale::with(['client', 'product'])->paginate(4);
+        return view('admin.sales.index', compact('sales')); 
     }
 
     /**
@@ -24,8 +24,9 @@ class SaleController extends Controller
      */
     public function create()
     {
-        $client = Client::pluck('id', 'name');
-        $product = Product::pluck('id', 'nameProduct');
+        $clients = Client::pluck('id', 'name');
+        $products = Product::pluck('id', 'nameProduct');
+        return view('admin/sales/create', compact('clients', 'products'));
     }
 
     /**
@@ -33,7 +34,14 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'client_id' => 'required|exists:clients,id',
+            'product_id' => 'required|exists:products,id',
+            'sale_date' => 'required|date',
+        ]);
+
+        Sale::create($validated);
+        return to_route('sales.index')->with('status', 'Venta creada exitosamente.');
     }
 
     /**
@@ -41,7 +49,7 @@ class SaleController extends Controller
      */
     public function show(Sale $sale)
     {
-        //
+        return view('admin/sales/show', compact('sale'));
     }
 
     /**
@@ -49,7 +57,9 @@ class SaleController extends Controller
      */
     public function edit(Sale $sale)
     {
-        //
+        $client = Client::pluck('id', 'name');
+        $product = Product::pluck('id', 'nameProduct');
+        return view('admin/sales/edit', compact('clients', 'products'));
     }
 
     /**
@@ -57,14 +67,27 @@ class SaleController extends Controller
      */
     public function update(Request $request, Sale $sale)
     {
-        //
+        $validated = $request->validate([
+            'client_id' => 'required|exists:clients,id',
+            'product_id' => 'required|exists:products,id',
+            'sale_date' => 'required|date',
+        ]);
+
+        $sale->update($validated);
+
+        return to_route('sales.index')->with('status', 'Venta actualizada exitosamente.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
+    public function delete(Sale $sale){
+        echo view('admin/sales/delete', compact('sale'));
+    }
+
     public function destroy(Sale $sale)
     {
-        //
+        $sale ->delete();
+        return to_route('sales.index');
     }
 }
