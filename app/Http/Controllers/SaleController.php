@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Sale;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
@@ -13,6 +15,7 @@ class SaleController extends Controller
      */
     public function index()
     {
+        $sale = Sale::paginate(4);
         return view ('admin/sales/index');
     }
 
@@ -21,7 +24,8 @@ class SaleController extends Controller
      */
     public function create()
     {
-        //
+        $client = Client::pluck('id', 'name');
+        $product = Product::pluck('id', 'nameProduct');
     }
 
     /**
